@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+.header {
+  padding: 2px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+.leftcolumn {   
+  float: left;
+  width: 100%;
+}
+
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+</style>
+</head>
+<body>
+  
+<div class="header">
+  <h2>somu's Blog</h2>
+</div>
+<div class="row">
+  <a href="{% url '' %}"><input type="submit" name="create" />Create New Blog</a>
+  <div class="leftcolumn">
+    {% for p in post reversed %}
+    <div class="card">
+      <a style="text-decoration: none; color: black;" href="/p/{{p.id}}">
+        <h1>{{p.title}}</h1>
+        <h2>{{p.subtitle |truncatewords:10}}</h2>
+        <h5>{{p.date}}</h5>
+        <p>{{p.description|truncatewords:20}}</p>
+      </a>
+    </div>
+      <input type="submit" name="update" />Update
+      <input type="submit" name="delete"/>Delete
+    <div>
+      
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>
